@@ -42,13 +42,28 @@ namespace LINQJoinGroupAggreagate
 
                     var customer = new Customer
                     {
-                        ID = int.Parse(columns[0]),
+                        Id = int.Parse(columns[0]),
                         Name = columns[2],
                         Country = columns[7]
                     };
 
                     bank.Customers.Add(customer);
                 }
+
+                int countOfAccounts = int.Parse(reader.ReadLine());
+
+                for (int i = 0; i < countOfAccounts; i++)
+                {
+                    string line = reader.ReadLine();
+                    string[] columns = line.Split(';');
+
+                    var account = new Account(id: int.Parse(columns[0]),
+                                              customerId: int.Parse(columns[1]),
+                                              saldo: decimal.Parse(columns[2]));
+
+                    bank.Accounts.Add(account);
+                }
+
             }
 
 
